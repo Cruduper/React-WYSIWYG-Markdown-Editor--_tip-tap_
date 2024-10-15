@@ -1,3 +1,7 @@
+#app-specific
+/src/components/MarkdownEditorParser
+/src/components/MarkdownEditorSimple
+
 # compiled output
 /dist
 /tmp
