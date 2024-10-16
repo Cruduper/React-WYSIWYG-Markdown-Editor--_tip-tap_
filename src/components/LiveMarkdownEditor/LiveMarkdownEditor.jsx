@@ -46,7 +46,7 @@ const MarkdownEditor = () => {
 
   return (
     <div className="text-editor">
-
+      <h2 className="text-editor-header">TipTap Text Editor</h2>
       <textarea className="markdown-input"
         onChange={handleInputChange}
         value={textContent}
