@@ -1,4 +1,4 @@
-import MarkdownEditor from './components/MarkdownEditor/MarkdownEditor'
+import MarkdownEditor from './components/LiveMarkdownEditor/LiveMarkdownEditor'
 import './styles/App.scss'
 
 

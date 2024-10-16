@@ -12,8 +12,8 @@ const MarkdownEditor = () => {
   const [textContent, setTextContent] = useState(demoText);
   const editor = useEditor({
     extensions: [
-      StarterKit,
-      Highlight,
+      StarterKit, 
+      Highlight, 
       Typography
     ],
     content: textContent,
@@ -35,13 +35,13 @@ const MarkdownEditor = () => {
     if (viewMode === 'Formatted Preview') {
       return <div className="live-preview-content" dangerouslySetInnerHTML={{ __html: marked(textContent) }} ></div>
     }
-    else if (viewMode === 'Raw HTML') {
+    else if (viewMode === 'Raw HTML') {   
       console.log(markdownToHTML(textContent))
       return <pre className="live-preview-content">{markdownToHTML(textContent)}</pre>
     }
     else {
       return <pre className="live-preview-content">{textContent}</pre>
-    }
+    } 
   }
 
   return (
@@ -63,7 +63,7 @@ const MarkdownEditor = () => {
         <h3 id="live-preview-header-text">
           {viewMode}
         </h3>
-        {getPreviewElement()}
+        {getPreviewElement()} 
       </div>
     </div>
   );
