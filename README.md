@@ -6,7 +6,7 @@
 --- 
 
 ### 📖 Description
-This is a very basic component that implements a live "What you see is what you get" (WYSIWYG) Markdown editor in React using the "tip-tap" JavaScript library.  
+This is a very basic component that implements a live "What you see is what you get" (WYSIWYG) Markdown editor in React using the [tiptap.js](https://tiptap.dev/docs) and [marked.js](https://marked.js.org/) JavaScript libraries.  
 
 The point of this component is to create an editor that I can use to author blog posts in-browser, and more or less see exactly what the blog post will look like before sending the text data for the blog post to be stored on the backend in markdown format. The backend will send the markdown for a specific blog post upon user ask, and display it for website visitors in roughly the same way it is displayed in this WYSIWYG Editor.   
 
@@ -20,8 +20,8 @@ I am trying out various libraries for this task so I may have other repos with s
 * _HTML_
 * _sass_
 * _eslint_
-* _tiptap.js_
-* _marked.js_
+* _tiptap.js_ \([docs](https://tiptap.dev/docs)\)
+* _marked.js_ \([docs](https://marked.js.org/)\)
 * _npm_
 <br><br/>
 
@@ -30,7 +30,8 @@ I am trying out various libraries for this task so I may have other repos with s
 1. Default styling is basic to ensure easier portability. For instance the the default selected button is not highlighted on page load. 
 2. Default styling is made for desktop viewing rather than mobile
 3. Default styling uses `.scss` (sass) files rather than `.css`, but no sass-specific syntax or features (mixins, etc) are used, so it should work fine just to rename the stylesheets with a `.css` filename if you don't want to install sass
-3. State is not output anywhere, but this is highly dependent upon specific implementation details
+4. State is not output anywhere, but this is highly dependent upon specific implementation details
+5. Input needs to be sanitized
 <br><br/>
 
 ### 🔧 Setup/Installation
@@ -44,7 +45,7 @@ I am trying out various libraries for this task so I may have other repos with s
 * _have a great time all the time!_
 
 ##### Copying component to an existing Project
-* _copy `src/components/MarkdownEditor/` folder into your Project wherever React components are placed_
+* _copy `src/components/LiveMarkdownEditor/` folder into your Project wherever React components are placed_
 * _install dependencies (npm example: `npm install @tiptap/react @tiptap/starter-kit @tiptap/extension-highlight @tiptap/extension-typography marked`)_
 * _install sass if you want to use `.scss` files (`npm install sass`) OR change `.scss` filenames to have `.css` extensions_
 * _inside MarkdownEditor.jsx delete the import and the useState reference to the demoText file, unless you want to use my default text for some reason, which is there only for demo purposes_
