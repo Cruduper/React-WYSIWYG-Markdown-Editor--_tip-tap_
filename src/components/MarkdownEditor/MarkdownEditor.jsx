@@ -5,15 +5,15 @@ import Highlight from '@tiptap/extension-highlight'
 import Typography from '@tiptap/extension-typography'
 import { marked } from 'marked';
 import { demoText } from '../../data/demoText.js'
-import './MarkdownEditor.scss'
+import './LiveMarkdownEditor.scss'
 
 const MarkdownEditor = () => {
-  const [viewMode, setViewMode] = useState('formatted');
+  const [viewMode, setViewMode] = useState('Formatted Preview'); // "Formatted Preview", "Raw HTML", "Raw Markdown"
   const [textContent, setTextContent] = useState(demoText);
   const editor = useEditor({
     extensions: [
-      StarterKit, 
-      Highlight, 
+      StarterKit,
+      Highlight,
       Typography
     ],
     content: textContent,
@@ -31,6 +31,19 @@ const MarkdownEditor = () => {
     return marked(markdownInput);
   }
 
+  function getPreviewElement() {
+    if (viewMode === 'Formatted Preview') {
+      return <div className="live-preview-content" dangerouslySetInnerHTML={{ __html: marked(textContent) }} ></div>
+    }
+    else if (viewMode === 'Raw HTML') {
+      console.log(markdownToHTML(textContent))
+      return <pre className="live-preview-content">{markdownToHTML(textContent)}</pre>
+    }
+    else {
+      return <pre className="live-preview-content">{textContent}</pre>
+    }
+  }
+
   return (
     <div className="text-editor">
 
@@ -41,28 +54,16 @@ const MarkdownEditor = () => {
       />
 
       <div className="view-buttons">
-        <button onClick={() => setViewMode('formatted')}>Formatted</button>
-        <button onClick={() => setViewMode('html')}>HTML</button>
-        <button onClick={() => setViewMode('markdown')}>Markdown</button>
+        <button onClick={() => setViewMode('Formatted Preview')}>Formatted</button>
+        <button onClick={() => setViewMode('Raw HTML')}>HTML</button>
+        <button onClick={() => setViewMode('Raw Markdown')}>Markdown</button>
       </div>
 
       <div className="live-preview-container">
         <h3 id="live-preview-header-text">
-          {viewMode === 'formatted' && 'Formatted Preview'}
-          {viewMode === 'html' && 'Raw HTML'}
-          {viewMode === 'markdown' && 'Raw Markdown'}
+          {viewMode}
         </h3>
-        { viewMode === 'formatted' && 
-          <div className="live-preview-content" dangerouslySetInnerHTML={{ __html:marked(textContent) }} ></div>
-        } 
-        { viewMode === 'html' && 
-          <>
-            <pre className="live-preview-content">{markdownToHTML(textContent)}</pre>
-          </>
-        } 
-        { viewMode === 'markdown' && 
-          <pre className="live-preview-content">{textContent}</pre>
-        } 
+        {getPreviewElement()}
       </div>
     </div>
   );
