@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { EditorContent, useEditor } from '@tiptap/react';
 import StarterKit from '@tiptap/starter-kit';
 import Highlight from '@tiptap/extension-highlight'
@@ -10,6 +10,7 @@ import './LiveMarkdownEditor.scss'
 const MarkdownEditor = () => {
   const [viewMode, setViewMode] = useState('Formatted Preview'); // "Formatted Preview", "Raw HTML", "Raw Markdown"
   const [textContent, setTextContent] = useState(demoText);
+  const defaultButtonRef = useRef(null);
   const editor = useEditor({
     extensions: [
       StarterKit, 
@@ -18,6 +19,12 @@ const MarkdownEditor = () => {
     ],
     content: textContent,
   });
+
+  useEffect(() => {
+    if (defaultButtonRef.current) {
+      defaultButtonRef.current.focus();
+    }
+  }, [])
 
   const handleInputChange = (event) => {
     const content = event.target.value;
@@ -54,7 +61,7 @@ const MarkdownEditor = () => {
       />
 
       <div className="view-buttons">
-        <button onClick={() => setViewMode('Formatted Preview')}>Formatted</button>
+        <button onClick={() => setViewMode('Formatted Preview')} ref={defaultButtonRef} >Formatted</button>
         <button onClick={() => setViewMode('Raw HTML')}>HTML</button>
         <button onClick={() => setViewMode('Raw Markdown')}>Markdown</button>
       </div>
